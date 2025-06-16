@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Certifications{% endblock %}
+
+{% block content %}
+<section
+    class="min-h-[75vh] flex items-center justify-center px-4 py-20 bg-gradient-to-br from-white to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    <div class="text-center max-w-2xl" data-aos="zoom-in">
+        <div
+            class="inline-flex items-center justify-center w-24 h-24 mb-6 bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400 rounded-full shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 1.5l9 4.5v6c0 5.25-3.9 9.83-9 10.5-5.1-.67-9-5.25-9-10.5v-6l9-4.5zM11 10v5h2v-5h-2zm0-3v2h2V7h-2z" />
+            </svg>
+        </div>
+        <h1 class="text-4xl font-extrabold text-gray-800 dark:text-white mb-4">Certifications on the Way</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+            I’m currently preparing a list of my professional certifications — including verified technical badges,
+            courses, and achievements. 🔒📜
+        </p>
+        <a href="{% url 'index' %}"
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded shadow font-semibold transition">
+            ← Back to Home
+        </a>
+    </div>
+</section>
+{% endblock %}

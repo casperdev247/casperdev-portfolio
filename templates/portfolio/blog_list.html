@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<section class="max-w-5xl mx-auto py-16 px-4">
+    <h1 class="text-4xl font-bold text-blue-600 font-mono mb-4" data-aos="fade-up">📚 CasperDEV Blog</h1>
+    <p class="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl" data-aos="fade-up" data-aos-delay="100">
+        Insights, tutorials, and updates on web development, Django tricks, real-time magic, and developer life.
+    </p>
+
+    {% if posts %}
+    <div class="grid gap-6 md:grid-cols-2" data-aos="fade-up" data-aos-delay="200">
+        {% for post in posts %}
+        <div class="bg-white dark:bg-gray-800 shadow rounded overflow-hidden hover:shadow-lg transition">
+            {% if post.cover %}
+            <img src="{{ post.cover.url }}" alt="{{ post.title }}" class="w-full h-48 object-cover">
+            {% endif %}
+            <div class="p-4">
+                <h2 class="text-xl font-semibold text-blue-700 dark:text-blue-400">
+                    <a href="{% url 'blog_detail' post.slug %}" class="hover:underline">
+                        {{ post.title }}
+                    </a>
+                </h2>
+                <p class="text-sm text-gray-500 mb-2">
+                    {{ post.created_at|date:"F j, Y" }}
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-3">
+                    {{ post.body|truncatewords:30 }}
+                </p>
+                <a href="{% url 'blog_detail' post.slug %}"
+                    class="inline-block text-sm text-blue-600 hover:underline dark:text-blue-400">Read more →</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-gray-400 dark:text-gray-500 mt-16">No blog posts yet. Stay tuned!</p>
+    {% endif %}
+</section>
+{% endblock %}

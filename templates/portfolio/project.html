@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<section class="max-w-5xl mx-auto py-16 px-4">
+    <h2 class="text-3xl font-bold mb-8 text-center text-blue-700 font-mono" data-aos="fade-up">My Projects</h2>
+
+    <!-- Tags Filter -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-right">
+        <a href="{% url 'project' %}"
+            class="px-4 py-1 rounded-full border text-sm {% if not selected_tag %}bg-blue-900 text-white{% else %}bg-white text-gray-800{% endif %}">
+            All
+        </a>
+        {% for tag in tags %}
+        <a href="?tag={{ tag.name }}"
+            class="px-4 py-1 rounded-full border text-sm {% if tag.name == selected_tag %}bg-blue-900 text-white{% else %}bg-white text-gray-800{% endif %}">
+            {{ tag.name }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- Project Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8" data-aos="fade-up">
+        {% for project in projects %}
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+            {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-48 object-cover">
+            {% else %}
+            <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+                No image available
+            </div>
+            {% endif %}
+            <div class="p-4">
+                <h3 class="text-xl font-semibold text-blue-600 mb-1">{{ project.title }}</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">{{ project.description|truncatewords:25 }}</p>
+
+                <div class="mb-2 flex flex-wrap gap-2">
+                    {% for tag in project.tags.all %}
+                    <span class="text-xs bg-blue-800 text-white px-2 py-1 rounded">{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="text-sm mt-2 space-x-3">
+                    <a href="{{ project.github_link }}" target="_blank" class="text-blue-500 hover:underline">GitHub</a>
+                    {% if project.live_link %}
+                    <a href="{{ project.live_link }}" target="_blank" class="text-blue-500 hover:underline">Live</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-gray-500 col-span-full">No projects found for this tag.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

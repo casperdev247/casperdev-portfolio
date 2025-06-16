@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CasperDEV{% endblock %} | CasperDEV</title>
+
+    <link rel="shortcut icon" href="{% static 'images/my_logo.png' %}" type="image/x-icon">
+    <script src="{% static 'js/3.4.16.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    {% block extra_css %}{% endblock %}
+    <style>
+        .fade-in {
+            animation: fadeIn 0.3s ease-in forwards;
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans">
+
+    <!-- ✅ Splash Screen -->
+    <div id="splashScreen"
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-gray-900 hidden">
+        <div class="text-center animate-pulse fade-in">
+            <img src="{% static 'images/my_logo.png' %}" alt="Logo" class="w-16 h-16 mx-auto mb-4">
+            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 font-mono">CasperDEV</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Loading...Please Wait!</p>
+        </div>
+    </div>
+
+    <!-- ✅ Reset Splash Button -->
+    <button id="resetSplash"
+        class="fixed bottom-4 right-4 bg-red-500 text-white text-xs px-3 py-1 rounded shadow hidden z-[99999]">
+        Reset Splash
+    </button>
+
+    <!-- ✅ Navbar -->
+    <header class="sticky top-0 bg-white dark:bg-gray-900 shadow z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <a href="{% url 'index' %}" class="flex items-center space-x-2">
+                <img src="{% static 'images/my_logo.png' %}" class="h-10 w-10 rounded" alt="logo">
+                <span class="text-lg font-bold tracking-tight font-mono">CasperDEV</span>
+            </a>
+
+            <nav class="hidden md:flex font-italic tracking-tight text-sm space-x-6">
+                <a href="{% url 'about' %}" class="hover:text-blue-500">About</a>
+                <a href="{% url 'project' %}" class="hover:text-blue-500">Projects</a>
+                <a href="{% url 'blog_list' %}" class="hover:text-blue-500">Blog</a>
+                <a href="{% url 'contact' %}" class="hover:text-blue-500">Contact</a>
+                <a href="{% url 'certifications' %}" class="hover:text-blue-500">Certifications</a>
+            </nav>
+
+            <!-- Mobile menu toggle -->
+            <div class="md:hidden">
+                <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+                    <svg class="h-6 w-6 text-gray-700 dark:text-gray-200" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div id="mobileMenu" class="md:hidden hidden px-4 pb-4 space-y-2">
+            <a href="{% url 'about' %}" class="block hover:text-purple-500">About</a>
+            <a href="{% url 'project' %}" class="block hover:text-purple-500">Projects</a>
+            <a href="{% url 'blog_list' %}" class="block hover:text-purple-500">Blog</a>
+            <a href="{% url 'contact' %}" class="block hover:text-purple-500">Contact</a>
+            <a href="{% url 'certifications' %}" class="hover:text-blue-500">Certifications</a>
+        </div>
+    </header>
+
+    <!-- ✅ Main content -->
+    <main class="min-h-[80vh]">
+        {% if messages %}
+        <div class="p-4">
+            {% for message in messages %}
+            <div class="text-white p-3 rounded bg-{{ message.tags }}-500 mb-2">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ✅ Footer -->
+    <footer class="bg-gray-900 text-white py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; {{ now.year }} CasperDEV | Built with 🧠, ☕, and TailwindCSS.</p>
+            <div class="mt-2 flex justify-center space-x-4 text-sm text-gray-400">
+                <a href="{% url 'contact' %}" class="hover:text-white">Contact</a>
+                <a href="https://github.com/casperdev247" target="_blank" class="hover:text-white">GitHub</a>
+                <a href="https://discord.gg/RTA9kNWx" target="_blank" class="hover:text-white">Discord</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ✅ JavaScript -->
+    {% block extra_js %}
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        window.addEventListener("load", () => {
+            const splash = document.getElementById("splashScreen");
+            const resetBtn = document.getElementById("resetSplash");
+
+            if (!localStorage.getItem("splashShown")) {
+                splash.classList.remove("hidden");
+                setTimeout(() => {
+                    splash.classList.add("fade-out");
+                    setTimeout(() => splash.remove(), 600);
+                }, 1400);
+                localStorage.setItem("splashShown", "true");
+            } else {
+                splash.remove();
+            }
+
+            // Dev shortcut to reset splash screen
+            document.addEventListener("keydown", (e) => {
+                if (e.ctrlKey && e.key === "r") {
+                    resetBtn.classList.toggle("hidden");
+                }
+            });
+
+            resetBtn.onclick = () => {
+                localStorage.removeItem("splashShown");
+                alert("Splash reset! Reload to test again.");
+            };
+        });
+    </script>
+    {% endblock %}
+
+</body>
+
+</html>

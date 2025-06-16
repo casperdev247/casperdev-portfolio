@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<section class="max-w-5xl mx-auto py-16 px-4">
+
+    <!-- Title -->
+    <h1 class="text-3xl md:text-4xl font-bold text-blue-600 font-mono mb-4" data-aos="fade-down">
+        About CasperDEV
+    </h1>
+
+    <!-- Introduction -->
+    <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed" data-aos="fade-up">
+        I’m <strong>Ashafoke David</strong>, a passionate full-stack developer focused on building smart, fast, and
+        modern web applications.
+        I specialize in Django, TailwindCSS, WebSocket real-time features, and clean UI/UX design. I believe every line
+        of code should solve a real-world problem.
+    </p>
+
+    <!-- Quote -->
+    <p class="text-sm italic text-gray-500 mb-10" data-aos="fade-up" data-aos-delay="100">
+        "Code is poetry, and every app is a story worth telling."
+    </p>
+
+    <!-- Tech Stack -->
+    <h2 class="text-xl font-semibold mb-4" data-aos="fade-right">Tech Stack</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-12 text-center" data-aos="zoom-in-up">
+        {% for tech in tech_stack %}
+        <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded shadow" data-aos="zoom-in">{{ tech }}</div>
+        {% endfor %}
+    </div>
+
+    <!-- Resume Button -->
+    <a href="{% static 'resume/my_resume.docx' %}" target="_blank"
+        class="inline-block bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700 transition"
+        data-aos="fade-up" data-aos-delay="150">
+        📄 Download My Resume
+    </a>
+
+</section>
+{% endblock %}

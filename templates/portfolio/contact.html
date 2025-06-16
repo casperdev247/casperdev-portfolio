@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<section class="max-w-4xl mx-auto py-16 px-4">
+    <h1 class="text-3xl md:text-4xl font-bold text-blue-600 font-mono mb-6" data-aos="fade-up">Let's Connect</h1>
+
+    <p class="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+        Feel free to reach out to me directly via any of the contact options below.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up" data-aos-delay="200">
+        <!-- Card: Email -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold">📧 Email</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-300">casperdev247@outlook.com</p>
+            </div>
+            <button onclick="navigator.clipboard.writeText('casperdev247@outlook.com'); alert('Copied!')"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Copy</button>
+        </div>
+
+        <!-- Card: GitHub -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold">💻 GitHub</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-300">
+                    <a href="https://github.com/casperdev247" target="_blank" class="text-blue-600 hover:underline">
+                        github.com/casperdev247
+                    </a>
+                </p>
+            </div>
+            <a href="https://github.com/casperdev247" target="_blank"
+                class="bg-gray-900 text-white px-3 py-1 rounded text-sm">Visit</a>
+        </div>
+
+        <!-- Card: Discord -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold">💬 Discord</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-300">
+                    <a href="https://discord.gg/RTA9kNWx" target="_blank" class="text-blue-600 hover:underline">
+                        discord.gg/RTA9kNWx
+                    </a>
+                </p>
+            </div>
+            <a href="https://discord.gg/RTA9kNWx" target="_blank"
+                class="bg-indigo-600 text-white px-3 py-1 rounded text-sm">Join</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

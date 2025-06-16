@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Resume{% endblock %}
+
+{% block content %}
+<section class="max-w-5xl mx-auto py-16 px-4">
+    <h1 class="text-3xl font-bold text-blue-600 font-mono mb-8 text-center">📄 Resume Preview</h1>
+
+    <!-- Resume Preview (PDF Embed or fallback) -->
+    <div class="bg-white rounded shadow-md overflow-hidden mb-6">
+        <iframe src="{% static 'resume/my_resume.docx' %}" class="w-full h-[600px] rounded" frameborder="0"
+            loading="lazy"></iframe>
+    </div>
+
+    <div class="text-center">
+        <a href="{% static 'resume/my_resume.pdf' %}" download
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded shadow transition">
+            ⬇ Download CV (PDF)
+        </a>
+    </div>
+</section>
+{% endblock %}

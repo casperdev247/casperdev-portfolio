@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- ✅ HERO SECTION -->
+<section class="bg-gradient-to-br from-white to-blue-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+            Hi, I'm <span class="text-blue-600">CasperDEV</span>
+        </h1>
+        <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+            A passionate full-stack developer and problem solver based in Nigeria. I build modern, scalable, and
+            user-focused web apps with Django, Tailwind, and React.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+            <a href="{% url 'project' %}"
+                class="px-6 py-3 text-white bg-blue-600 hover:bg-blue-700 rounded shadow font-semibold transition">
+                View Projects
+            </a>
+            <a href="{% url 'contact' %}"
+                class="px-6 py-3 text-blue-600 border border-blue-600 hover:bg-blue-50 rounded font-semibold transition">
+                Contact Me
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ✅ ABOUT PREVIEW -->
+<section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Who is CasperDEV?</h2>
+        <p class="text-gray-700 leading-relaxed">
+            I'm a results-driven developer who loves crafting clean, functional, and beautiful applications. Whether
+            it's backend logic or frontend finesse, I bring ideas to life using tools like Django, TailwindCSS,
+            WebSockets, and more.
+        </p>
+        <div class="mt-6">
+            <a href="{% url 'about' %}" class="inline-block mt-4 text-blue-600 hover:underline font-semibold">
+                Learn more →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ✅ FEATURED PROJECTS -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-10">Featured Projects</h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            {% for project in featured_projects %}
+            <div class="bg-white rounded-lg shadow hover:shadow-md transition">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}" class="rounded-t w-full h-48 object-cover"
+                    loading="lazy" decoding="async">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">{{ project.title }}</h3>
+                    <p class="text-sm text-gray-600 mt-1 line-clamp-3">
+                        {{ project.description|truncatechars:100 }}
+                    </p>
+                    <a href="{{ project.github_link }}" target="_blank"
+                        class="text-blue-600 hover:underline text-sm mt-3 inline-block">
+                        View Project
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center col-span-3 text-gray-500">No featured projects yet.</p>
+            {% endfor %}
+        </div>
+
+        <div class="mt-10 text-center">
+            <a href="{% url 'project' %}" class="inline-block text-blue-600 hover:underline font-semibold">
+                View All Projects →
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
