@@ -38,7 +38,6 @@ pycparser==2.22
 Pygments==2.19.1
 pyOpenSSL==25.1.0
 python-dotenv==1.1.0
-pywin32==309
 requests==2.32.3
 service-identity==24.2.0
 setuptools==80.9.0
