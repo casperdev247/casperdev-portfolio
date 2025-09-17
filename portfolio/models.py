@@ -22,8 +22,8 @@ class Tag(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    github_link = models.URLField(unique=True)
-    live_link = models.URLField(unique=True, blank=True, null=True)
+    site_url = models.URLField(blank=True, null=True)
+    project = models.FileField(unique=True, blank=True, null=True)
     image = models.ImageField(upload_to='static/project_images')
     posted_at = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField(Tag, blank=True)

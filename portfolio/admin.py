@@ -11,8 +11,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):  # ✅ Changed name
-    list_display = ('title', 'github_link', 'posted_at')
-    search_fields = ('title', 'github_link', 'description')
+    list_display = ('title', 'project', 'posted_at')
+    search_fields = ('title', 'project', 'description')
     list_filter = ('posted_at',)
 
 
